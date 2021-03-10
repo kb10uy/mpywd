@@ -1,0 +1,21 @@
+[package]
+name = "mpywd-rs"
+version = "0.1.0"
+authors = ["Yū Kobayashi <kb10uy@kb10uy.org>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+log = "0.4.14"
+pretty_env_logger = "0.4.0"
+anyhow = "1.0.38"
+async-std = { version = "1.9.0", features = ["attributes"] }
+async-trait = "0.1.45"
+futures = "0.3.13"
+tide = "0.16.0"
+serde = { version = "1.0.124", features = ["derive"] }
+toml = "0.5.8"
+serde_json = "1.0.64"
+rand = "0.8.3"
+rand_distr = "0.4.0"
