@@ -1,0 +1,64 @@
+listen_at = "127.0.0.1:4545"
+
+[lootbox]
+title = "実務経験ガチャ"
+
+[[lootbox.rarities]]
+label = "SSR"
+probability = 5
+
+  [[lootbox.rarities.items]]
+  title = "実務経験がないのでしょうか。。。"
+  url = "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13149033688"
+
+[[lootbox.rarities]]
+label = "SR"
+probability = 95
+
+  [[lootbox.rarities.items]]
+  title = "PHP 界のプリンス"
+  url = "https://web.archive.org/web/20170408045701/https://codeiq.jp/magazine/2015/11/31368/"
+
+  [[lootbox.rarities.items]]
+  title = "くだらん解答"
+  url = "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11152944766"
+
+  [[lootbox.rarities.items]]
+  title = "ごちうさ難民的に"
+  url = "https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13173759308"
+
+  [[lootbox.rarities.items]]
+  title = "いってる意味がよくわかりません"
+  url = "https://web.archive.org/web/20181111004435/https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13198470468"
+
+[[lootbox.rarities]]
+label = "R"
+probability = 200
+
+  [[lootbox.rarities.items]]
+  title = "Twitter"
+  url = "https://twitter.com/mpyw"
+
+  [[lootbox.rarities.items]]
+  title = "GitHub"
+  url = "https://github.com/mpyw"
+
+  [[lootbox.rarities.items]]
+  title = "Qiita"
+  url = "https://qiita.com/mpyw"
+
+  [[lootbox.rarities.items]]
+  title = "はてなブログ"
+  url = "https://mpyw.hateblo.jp"
+
+[[lootbox.rarities]]
+label = "N"
+probability = 700
+
+  [[lootbox.rarities.items]]
+  title = "這いよれ！ニャル子さん"
+  url = "https://nyaruko.com"
+
+  [[lootbox.rarities.items]]
+  title = "ご注文はうさぎですか？"
+  url = "https://gochiusa.com"

@@ -2,19 +2,35 @@ pub mod data;
 pub mod endpoint;
 pub mod schema;
 
-use async_std::{fs::read_to_string, path::Path, sync::Arc,};
+use async_std::{fs::read_to_string, path::Path, sync::Arc};
 
 use anyhow::Result;
+use clap::Clap;
 use log::info;
 use rand_distr::WeightedAliasIndex;
+
+/// Shared application state.
+#[derive(Debug)]
+pub struct State {
+    pub lootbox: data::Lootbox,
+    pub distribution: WeightedAliasIndex<usize>,
+}
+
+/// Commandline arguments.
+#[derive(Debug, Clap)]
+pub struct Arguments {
+    /// Specifies configuration file
+    config: String,
+}
 
 #[async_std::main]
 async fn main() -> Result<()> {
     pretty_env_logger::init();
-    let config = load_configuration("config.toml").await?;
+    let args = Arguments::parse();
+    let config = load_configuration(&args.config).await?;
 
     let weights = config.lootbox.rarity_weights().collect();
-    let state = data::State {
+    let state = State {
         lootbox: config.lootbox,
         distribution: WeightedAliasIndex::new(weights)?,
     };

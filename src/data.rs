@@ -1,13 +1,6 @@
 //! Contains configuration structs.
 
-use rand_distr::WeightedAliasIndex;
 use serde::Deserialize;
-
-#[derive(Debug)]
-pub struct State {
-    pub lootbox: Lootbox,
-    pub distribution: WeightedAliasIndex<usize>,
-}
 
 #[derive(Debug, PartialEq, Eq, Clone, Deserialize)]
 pub struct Configuration {

@@ -1,7 +1,7 @@
-/// Contains endpoint handlers.
+//! Contains endpoint handlers.
 
 use crate::{
-    data::State,
+    State,
     schema::{
         ErrorResponse, FancyApiQuery, FancyApiResponse, FancyApiResponseFrame, SimpleApiQuery,
         SimpleApiResponse,
