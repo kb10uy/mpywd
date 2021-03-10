@@ -1,20 +1,23 @@
 //! Contains endpoint handlers.
 
 use crate::{
-    State,
     schema::{
         ErrorResponse, FancyApiQuery, FancyApiResponse, FancyApiResponseFrame, SimpleApiQuery,
         SimpleApiResponse,
     },
+    State,
 };
 
 use async_std::sync::Arc;
 
+use log::info;
+use percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
 use rand::prelude::*;
 use tide::{http::StatusCode, Request, Response, Result as TideResult};
 
 /// Handles `GET /`.
 pub async fn index(request: Request<Arc<State>>) -> TideResult {
+    info!("Performing simple redirect endpoint");
     let state = request.state();
 
     let mut rng = thread_rng();
@@ -28,9 +31,18 @@ pub async fn index(request: Request<Arc<State>>) -> TideResult {
         .expect("A rarity set must have at least one item");
 
     let response = Response::builder(StatusCode::Found)
-        .header("X-Lootbox-Title", &lootbox.title)
-        .header("X-Lootbox-Item-Rarity", &rarity.label)
-        .header("X-Lootbox-Item-Title", &item.title)
+        .header(
+            "X-Lootbox-Title",
+            &utf8_percent_encode(&lootbox.title, NON_ALPHANUMERIC).to_string(),
+        )
+        .header(
+            "X-Lootbox-Item-Rarity",
+            &utf8_percent_encode(&rarity.label, NON_ALPHANUMERIC).to_string(),
+        )
+        .header(
+            "X-Lootbox-Item-Title",
+            &utf8_percent_encode(&item.title, NON_ALPHANUMERIC).to_string(),
+        )
         .header("Location", &item.url)
         .build();
 
@@ -39,6 +51,7 @@ pub async fn index(request: Request<Arc<State>>) -> TideResult {
 
 /// Handles `GET /api`.
 pub async fn api(request: Request<Arc<State>>) -> TideResult {
+    info!("Performing simple API endpoint");
     let query: SimpleApiQuery = request.query()?;
     let state = request.state();
 
@@ -58,7 +71,10 @@ pub async fn api(request: Request<Arc<State>>) -> TideResult {
     }
 
     let response = Response::builder(StatusCode::Ok)
-        .header("X-Lootbox-Title", &lootbox.title)
+        .header(
+            "X-Lootbox-Title",
+            &utf8_percent_encode(&lootbox.title, NON_ALPHANUMERIC).to_string(),
+        )
         .body(serde_json::to_value(SimpleApiResponse {
             title: lootbox.title.clone(),
             result,
@@ -70,6 +86,7 @@ pub async fn api(request: Request<Arc<State>>) -> TideResult {
 
 /// Handles `GET /fancy`.
 pub async fn fancy(request: Request<Arc<State>>) -> TideResult {
+    info!("Performing simple API endpoint");
     let query: FancyApiQuery = request.query()?;
     let state = request.state();
 
@@ -128,7 +145,10 @@ pub async fn fancy(request: Request<Arc<State>>) -> TideResult {
     }
 
     let response = Response::builder(StatusCode::Ok)
-        .header("X-Lootbox-Title", &lootbox.title)
+        .header(
+            "X-Lootbox-Title",
+            &utf8_percent_encode(&lootbox.title, NON_ALPHANUMERIC).to_string(),
+        )
         .body(serde_json::to_value(FancyApiResponse {
             title: lootbox.title.clone(),
             result,
